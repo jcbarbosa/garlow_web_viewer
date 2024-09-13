@@ -1,0 +1,50 @@
+@page
+@model MacReportViewer.Pages.ReportsModel
+@{
+    ViewData["Title"] = "Reports";
+}
+
+<div class="container">
+    <h1 class="mt-4">Device Reports (@Model.MacAddress)</h1>
+
+    @* <form method="get" class="mt-4">
+        <div class="form-group">
+            <label for="macAddress">MAC Address</label>
+            <input type="text" class="form-control" id="macAddress" name="macAddress" placeholder="Enter MAC Address">
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+    </form> *@
+
+    @if (Model.Reports != null && Model.Reports.Count > 0)
+    {
+        <table class="table table-striped table-bordered mt-4">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Usage Level</th>
+                    <th>Battery Level</th>
+                    <th>Network Level</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var report in Model.Reports)
+                {
+                    <tr>
+                        <td>@report.UsageLevel</td>
+                        <td>@report.BatteryLevel</td>
+                        <td>@report.NetworkLevel</td>
+                        <td>@report.Timestamp</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else if (Model.ModelState.ErrorCount > 0)
+    {
+        <div class="alert alert-danger mt-4">@Model.ModelState[""].Errors[0].ErrorMessage</div>
+    }
+    else if (Model.Reports != null && Model.Reports.Count == 0)
+    {
+        <div class="alert alert-info mt-4">No reports found for the specified device.</div>
+    }
+</div>

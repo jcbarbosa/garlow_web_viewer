@@ -1,0 +1,91 @@
+@page
+@model MacReportViewer.Pages.ConfigModel
+@{
+    ViewData["Title"] = "Device Configuration";
+
+    // List of enum values
+    var states = Enum.GetValues(typeof(ContainerAccessControllerConfigState)).Cast<ContainerAccessControllerConfigState>();
+
+}
+
+<div class="container">
+    <h1 class="mt-4">Device Configuration (@Model.MacAddress)</h1>
+
+    @if (Model.Config != null)
+    {
+        <form method="post">
+            <div class="form-group">
+                <label for="State">State</label>
+                <select class="form-control" id="State" name="Config.State">
+                    @foreach (var state in states)
+                    {
+                        @if (Model.Config.State == state)
+                        {
+                            <option value="@state" selected>@state</option>
+                        }
+                        else
+                        {
+                            <option value="@state">@state</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="NetworkServer">Network Server</label>
+                <input type="text" class="form-control" id="NetworkServer" name="Config.NetworkServer" value="@Model.Config.NetworkServer" required>
+            </div>
+
+            <div class="form-group">
+                <label for="NetworkPort">Network Port</label>
+                <input type="number" class="form-control" id="NetworkPort" name="Config.NetworkPort" value="@Model.Config.NetworkPort" required>
+            </div>
+
+            <div class="form-group">
+                <label for="NetworkApn">Network APN</label>
+                <input type="text" class="form-control" id="NetworkApn" name="Config.NetworkApn" value="@Model.Config.NetworkApn">
+            </div>
+
+            <div class="form-group">
+                <label for="NetworkUser">Network User</label>
+                <input type="text" class="form-control" id="NetworkUser" name="Config.NetworkUser" value="@Model.Config.NetworkUser">
+            </div>
+
+            <div class="form-group">
+                <label for="NetworkPassword">Network Password</label>
+                <input type="password" class="form-control" id="NetworkPassword" name="Config.NetworkPassword" value="@Model.Config.NetworkPassword">
+            </div>
+
+            <div class="form-group">
+                <label for="ComunicationTimeOfDay1">Communication Time of Day 1</label>
+                <input type="number" class="form-control" id="ComunicationTimeOfDay1" name="Config.ComunicationTimeOfDay1" value="@Model.Config.ComunicationTimeOfDay1">
+            </div>
+
+            <div class="form-group">
+                <label for="ComunicationTimeOfDay2">Communication Time of Day 2</label>
+                <input type="number" class="form-control" id="ComunicationTimeOfDay2" name="Config.ComunicationTimeOfDay2" value="@Model.Config.ComunicationTimeOfDay2">
+            </div>
+
+            <div class="form-group">
+                <label for="ComunicationTimeOfDay3">Communication Time of Day 3</label>
+                <input type="number" class="form-control" id="ComunicationTimeOfDay3" name="Config.ComunicationTimeOfDay3" value="@Model.Config.ComunicationTimeOfDay3">
+            </div>
+
+            <div class="form-group">
+                <label for="ComunicationTimeOfDay4">Communication Time of Day 4</label>
+                <input type="number" class="form-control" id="ComunicationTimeOfDay4" name="Config.ComunicationTimeOfDay4" value="@Model.Config.ComunicationTimeOfDay4">
+            </div>
+
+            <div class="form-group">
+                <label for="Periodicity">Periodicity</label>
+                <input type="number" class="form-control" id="Periodicity" name="Config.Periodicity" value="@Model.Config.Periodicity">
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Save Configuration</button>
+        </form>
+    }
+    else
+    {
+        <div class="alert alert-danger mt-4">Configuration not found.</div>
+    }
+</div>
