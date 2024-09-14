@@ -20,7 +20,7 @@ namespace MacReportViewer.Pages
 
             if (!string.IsNullOrEmpty(macAddress))
             {
-                string filePath = Path.Combine("../garlow/csharp/GarlowTcpServer/bin/Debug/net8.0/devices", $"{macAddress}.json");
+                string filePath = Path.Combine("~/garlow_web_viewer/GarlowTcpServer/bin/Debug/net8.0/devices", $"{macAddress}.json");
 
                 if (System.IO.File.Exists(filePath))
                 {
